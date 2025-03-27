@@ -1,11 +1,14 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0" version="26.1.1">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 YaBrowser/25.2.0.0 Safari/537.36" version="26.1.3">
   <diagram name="Страница — 1" id="ttHTj2BRp232E3ya2YmA">
-    <mxGraphModel dx="1434" dy="754" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="1242" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="w3tqLhwRUiY4J_HBSk55-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="670" y="360" width="120" height="60" as="geometry" />
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-1" value="Характеристики" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="650" y="400" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-2" value="Резкость&lt;div&gt;Цвета&lt;/div&gt;&lt;div&gt;Шумы&lt;/div&gt;&lt;div&gt;Виньетирование&lt;/div&gt;&lt;div&gt;Геометрическое искажение&lt;/div&gt;&lt;div&gt;хром. Абберации&lt;/div&gt;&lt;div&gt;Rolling shutter&lt;/div&gt;&lt;div&gt;ИК&lt;/div&gt;&lt;div&gt;Муар&lt;/div&gt;&lt;div&gt;Светосила&lt;/div&gt;&lt;div&gt;Блики&amp;nbsp;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="575" y="390" width="270" height="230" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
