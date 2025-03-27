@@ -4,11 +4,23 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="gY2CUuTmCkJey6hMHE3h-1" value="Характеристики" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="650" y="400" width="120" height="30" as="geometry" />
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-1" value="&lt;b&gt;Характеристики&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="370" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gY2CUuTmCkJey6hMHE3h-2" value="Резкость&lt;div&gt;Цвета&lt;/div&gt;&lt;div&gt;Шумы&lt;/div&gt;&lt;div&gt;Виньетирование&lt;/div&gt;&lt;div&gt;Геометрическое искажение&lt;/div&gt;&lt;div&gt;хром. Абберации&lt;/div&gt;&lt;div&gt;Rolling shutter&lt;/div&gt;&lt;div&gt;ИК&lt;/div&gt;&lt;div&gt;Муар&lt;/div&gt;&lt;div&gt;Светосила&lt;/div&gt;&lt;div&gt;Блики&amp;nbsp;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="575" y="390" width="270" height="230" as="geometry" />
+          <mxGeometry x="565" y="360" width="270" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-4" value="&lt;b&gt;Роман&lt;/b&gt;:&lt;div&gt;Резкость&lt;/div&gt;&lt;div&gt;Цвета&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="400" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-5" value="&lt;b&gt;Диана&lt;/b&gt;:&lt;div&gt;Шумы&lt;/div&gt;&lt;div&gt;Виньетирование&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="460" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-6" value="&lt;b&gt;Кирилл&lt;/b&gt;:&lt;div&gt;Геометрическое искажение&lt;/div&gt;&lt;div&gt;хром. аберрации&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="420" y="500" width="180" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="gY2CUuTmCkJey6hMHE3h-7" value="&lt;b&gt;Максим&lt;/b&gt;&lt;div&gt;Rolling Shutter&lt;/div&gt;&lt;div&gt;Муар&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ общее приложение&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="405" y="590" width="210" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
