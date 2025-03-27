@@ -15,7 +15,7 @@ def estimate_sharpness(image_path):
     sharpness = laplacian.var()
     
     return sharpness
-
+###
 # Пример использования
 #image_path = os.path.join(os.path.dirname(__file__), 'my_photo.jpg')
 image_path = 'C:\my_photo.jpg'
