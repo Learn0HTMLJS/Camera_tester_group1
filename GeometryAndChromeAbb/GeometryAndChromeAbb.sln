@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Geometry", "Geometry\Geometry.pyproj", "{AC099CD7-2E83-4FAD-8573-11088D838CC5}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ChromeAbb", "ChromeAbb\ChromeAbb.pyproj", "{B31F9189-F263-4377-BE45-9AD7E47954BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AC099CD7-2E83-4FAD-8573-11088D838CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC099CD7-2E83-4FAD-8573-11088D838CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B31F9189-F263-4377-BE45-9AD7E47954BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B31F9189-F263-4377-BE45-9AD7E47954BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
