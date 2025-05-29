@@ -1,6 +1,7 @@
-## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Camera%20with%20Flash.png" alt="Camera with Flash" width="40" height="40" /> <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&pause=1000&vCenter=true&width=435&height=25&lines=%D0%A2%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5+%D0%BA%D0%B0%D0%BC%D0%B5%D1%80%D1%8B" alt="Typing SVG" />
+## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Camera%20with%20Flash.png" alt="Camera with Flash" width="40" height="40" /> <img src="https://readme-typing-svg.herokuapp.com/?font=Fira+Code&size=24&pause=1000&vCenter=true&width=435&height=25&lines=%D0%90%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7+%D0%BA%D0%B0%D0%BC%D0%B5%D1%80%D1%8B" alt="Typing SVG" />
 
 ###  Инструмент для тестирования характеристик камеры на основе изображений.
+
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Bar%20Chart.png" alt="Bar Chart" width="25" height="25" /> Какие характеристики тестируются?
 - **Резкость**  
@@ -15,6 +16,8 @@
 - **Блики**
 - **Инфокрасная подсветка**
 
+---
+
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Hammer%20and%20Wrench.png" alt="Hammer and Wrench" width="25" height="25" /> Зависимости
 
 | Библиотека       | Версия  | Назначение                                              | Ссылка                                    |
@@ -23,6 +26,18 @@
 | NumPy            | 2.2.0   | Матричные операции и вычисления                         | [https://numpy.org/](https://numpy.org)   |
 | Matplotlib       | 3.10.3  | Визуализации данных двумерной и трёхмерной графикой     | [https://matplotlib.org/](https://matplotlib.org)   |
 
+
+
+## ✅ Как использовать
+---
+
+## 📌 Поддерживаемые форматы изображений
+
+Программы поддерживают все распространённые форматы изображений (JPEG, PNG, BMP и т.д.), поддерживаемые библиотекой OpenCV.
+
+---
+
+
 ## 👨‍💻 Разработчики
 * [Панкин Максим](https://github.com/9chyn9)
 * [Свинцицкий Роман](ссылка)
@@ -30,9 +45,12 @@
 * [Васинкина Диана](ссылка)
 * [Ашымбеков Тариэл](ссылка)
 * [Воробьёва Кристина](ссылка)
+---
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Scroll.png" alt="Scroll" width="25" height="25" /> Лицензия
 Проект распространяется под [MIT License](https://choosealicense.com/licenses/mit/)
+
+---
 
 <!-- ### **1. Общие методы оценки качества изображения**  
 - **Imatest® Software: Principles** (2005) – подробное описание алгоритмов оценки резкости (MTF), дисторсии, виньетирования и шумов.  

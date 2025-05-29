@@ -56,9 +56,9 @@ def detect_moire_pattern(image_path, threshold=30, kernel_size=5):
     overlay = cv2.addWeighted(img_color, 1, morphed_color, 0.5, 0)
     
     return [
-        {'title': 'Амплитудный спектр (Фурье)', 'data': magnitude_spectrum, 'cmap': 'gray'},
-        {'title': 'Маска для Фурье', 'data': mask[:, :, 0], 'cmap': 'gray'},
-        {'title': 'Обратное Фурье с маской', 'data': img_back, 'cmap': 'gray'},
-        {'title': f'Обнаруженный муар ({moire_percentage:.2f}%)', 'data': morphed, 'cmap': 'gray'},
-        {'title': 'Муар на исходном изображении', 'data': cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB), 'cmap': None},
+        {'title': 'Амплитудный спектр (Фурье)', 'data': magnitude_spectrum, 'cmap': 'gray', 'type': 'flat'},
+        {'title': 'Маска для Фурье', 'data': mask[:, :, 0], 'cmap': 'gray', 'type': 'flat'},
+        {'title': 'Обратное Фурье с маской', 'data': img_back, 'cmap': 'gray', 'type': 'flat'},
+        {'title': f'Обнаруженный муар ({moire_percentage:.2f}%)', 'data': morphed, 'cmap': 'gray', 'type': 'flat'},
+        {'title': 'Муар на исходном изображении', 'data': cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB), 'cmap': None, 'type': 'flat'},
     ]

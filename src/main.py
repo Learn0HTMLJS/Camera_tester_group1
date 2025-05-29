@@ -1,3 +1,4 @@
+from chrome_abb.chrome_abb import detect_chromatic_aberration
 import cv2
 import math
 import matplotlib.pyplot as plt
@@ -5,9 +6,12 @@ from matplotlib.widgets import Button
 from matplotlib.gridspec import GridSpec
 from tkinter import Tk, filedialog
 
+from geometry.geometry import estimate_distortion
+from glare.glare import detect_glare_with_otsu
 from moire.moire import detect_moire_pattern
+from noise.noise import evaluate_noise
 from rolling_shutter.rolling_shutter import detect_rolling_shutter_pattern
-from sharpness.sharpness import estimate_sharpness
+from sharpness.sharpness import calculate_mtf
 
 # Загрузка изображения
 Tk().withdraw()
@@ -36,7 +40,11 @@ views = [
     {'title': 'Оригинальное изображение', 'object': {'data': img_rgb, 'cmap': 'gray'}, 'type': 'plot'},
     {'title': 'Эффект "Муар"', 'object': lambda: detect_moire_pattern(file_path), 'type': 'multiplot'},
     {'title': 'Временной параллакс', 'object': lambda: detect_rolling_shutter_pattern(file_path), 'type': 'plot'},
-    {'title': 'Резкость', 'object': lambda: estimate_sharpness(file_path), 'type': 'text'},
+    {'title': 'Блики', 'object': lambda: detect_glare_with_otsu(file_path), 'type': 'multiplot'},
+    {'title': 'Резкость', 'object': lambda: calculate_mtf(file_path), 'type': 'multiplot'},
+    {'title': 'Шум', 'object': lambda: evaluate_noise(file_path), 'type': 'multiplot'},
+    {'title': 'Хром-аберрация', 'object': lambda: detect_chromatic_aberration(file_path), 'type': 'multiplot'},
+    {'title': 'Искажение', 'object': lambda: estimate_distortion(file_path), 'type': 'multiplot'},
 ]
 
 # --- Настройка графика ---
@@ -74,16 +82,44 @@ def show_view(index):
         gs = GridSpec(rows, cols, figure=fig)
         gs.update(bottom=0.2)  # Оставляем место для кнопок
 
-        for i, data in enumerate(data_list):
+        for i, element in enumerate(data_list):
             ax_sub = fig.add_subplot(gs[i])
             subplot_axes.append(ax_sub)
 
-            if data.get('type') == 'text':
-                ax_sub.text(0.5, 0.5, f"{data['title']}: {data['data']:.2f}%", fontsize=12, ha='center')
+            if element.get('type') == 'text':
+                ax_sub.set_facecolor('gray')
+                ax_sub.text(0.5, 0.5, element['data'], fontsize=12, ha='center', bbox=dict(facecolor='none', edgecolor='black', boxstyle='round,pad=1'))
+                if element.get('title'):
+                    ax_sub.set_title(element['title'])
                 ax_sub.axis('off')
-            else:
-                ax_sub.imshow(data['data'], cmap=data.get('cmap'))
-                ax_sub.set_title(data['title'])
+            elif element.get('type') == 'hist':
+                ax_sub.hist(element['data'], 256, [0,256])
+                ax_sub.set_title(element['title'])
+                ax_sub.axis('off')
+            elif element.get('type') == 'graph':
+                if element['space'] == 2:
+                    x = element['data']['x']
+                    y = element['data']['y']
+                    ax_sub.plot(x['region'], y['region'])
+                    
+                    if x.get('label'):
+                        ax_sub.set(xlabel = x['label'])
+                    if y.get('label'):
+                        ax_sub.set(ylabel = y['label'])
+                
+                elif element['space'] == 1:
+                    x = element['data']['x']
+                    ax_sub.plot(x['region'])
+                    
+                    if x.get('label'):
+                        ax_sub.set(xlabel = x['label'])
+                    
+                ax_sub.set_title(element['title'])
+                if element['grid'] == True:
+                    ax_sub.grid()
+            elif element.get('type') == 'flat':
+                ax_sub.imshow(element['data'], cmap=element.get('cmap'))
+                ax_sub.set_title(element['title'])
                 ax_sub.axis('off')
 
         fig.suptitle(view.get('title', 'Multiplot View'), fontsize=14)

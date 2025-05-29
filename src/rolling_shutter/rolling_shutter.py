@@ -30,8 +30,4 @@ def detect_rolling_shutter_pattern(image_path):
     # Накладываем линии на оригинальное изображение
     combined = cv2.addWeighted(image, 0.8, line_image, 1, 0)
     
-    return {
-        'title': 'Обнаруженные линии (возможный эффект rolling shutter)', 
-        'data': cv2.cvtColor(combined, cv2.COLOR_BGR2RGB), 
-        'cmap': None
-    }
+    return {'title': 'Обнаруженные линии (возможный эффект rolling shutter)', 'data': cv2.cvtColor(combined, cv2.COLOR_BGR2RGB), 'cmap': None, 'type': 'flat'}
