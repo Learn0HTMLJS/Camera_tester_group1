@@ -22,6 +22,13 @@ file_path = filedialog.askopenfilename(
 if not file_path:
     print("Изображение не выбрано!")
     exit()
+sharpness_file_path = filedialog.askopenfilename(
+    title="Выберите изображение для определения резкости",
+    filetypes=[("Image Files", "*.png *.jpg *.jpeg *.bmp *.tiff")]
+)
+if not sharpness_file_path:
+    print("Изображение не выбрано!")
+    exit()
 
 # --- Создание views ---
 img_bgr = cv2.imread(file_path)
@@ -41,7 +48,7 @@ views = [
     {'title': 'Эффект "Муар"', 'object': lambda: detect_moire_pattern(file_path), 'type': 'multiplot'},
     {'title': 'Временной параллакс', 'object': lambda: detect_rolling_shutter_pattern(file_path), 'type': 'plot'},
     {'title': 'Блики', 'object': lambda: detect_glare_with_otsu(file_path), 'type': 'multiplot'},
-    {'title': 'Резкость', 'object': lambda: calculate_mtf(file_path), 'type': 'multiplot'},
+    {'title': 'Резкость', 'object': lambda: calculate_mtf(sharpness_file_path), 'type': 'multiplot'},
     {'title': 'Шум', 'object': lambda: evaluate_noise(file_path), 'type': 'multiplot'},
     {'title': 'Хром-аберрация', 'object': lambda: detect_chromatic_aberration(file_path), 'type': 'multiplot'},
     {'title': 'Искажение', 'object': lambda: estimate_distortion(file_path), 'type': 'multiplot'},
