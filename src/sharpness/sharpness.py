@@ -3,6 +3,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fftpack import fft
 
+def evaluate_mtf(mtf_values, freq):
+    """Оценка качества резкости по MTF"""
+    # Критерии оценки
+    mtf50 = freq[np.where(mtf_values >= 0.5)[0][-1]] if np.any(mtf_values >= 0.5) else 0
+    mtf30 = freq[np.where(mtf_values >= 0.3)[0][-1]] if np.any(mtf_values >= 0.3) else 0
+    mtf10 = freq[np.where(mtf_values >= 0.1)[0][-1]] if np.any(mtf_values >= 0.1) else 0
+    
+    print("\nОценка резкости:")
+    print(f"MTF50: {mtf50:.3f} циклов/пиксель (частота, где контраст падает до 50%)")
+    print(f"MTF30: {mtf30:.3f} циклов/пиксель (частота, где контраст падает до 30%)")
+    print(f"MTF10: {mtf10:.3f} циклов/пиксель (предел разрешения, 10% контраста)")
+    
+    # Качественная оценка
+    if mtf50 > 0.15:
+        return ("Отличная резкость!\n Система сохраняет высокий\n контраст на мелких деталях.")
+    elif mtf50 > 0.1:
+        return ("Хорошая резкость.\n Приемлемое качество для\n большинства задач.")
+    else:
+        return ("Низкая резкость.\n Возможны проблемы с фокусировкой\n или качеством оптики.")
+
 def calculate_mtf(image_path, edge_angle='vertical'):
     # Загрузка изображения
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
@@ -35,10 +55,18 @@ def calculate_mtf(image_path, edge_angle='vertical'):
 
     # Частотная ось (в циклах/пиксель)
     freq = np.fft.fftfreq(n, d=1.0)[:n//2]
+
+        # Фильтрация высоких частот
+    window = np.hanning(len(mtf))
+    mtf_smoothed = mtf * window
+
+    # Оценка результатов
+    talmud = evaluate_mtf(mtf_smoothed, freq)
     
     return [
-        {'title':'Область с краем', 'data': roi, 'cmap': 'gray', 'type':'flat'},
+        #{'title':'Область с краем', 'data': roi, 'cmap': 'gray', 'type':'flat'},
         {'title':'Функция распределения края (ESF)', 'data': {'x': {'region': esf}}, 'cmap': None, 'type':'graph', 'space': 1, 'grid': False},
         {'title':'Функция распределения линии (LSF)', 'data': {'x': {'region': lsf}}, 'cmap': None, 'type':'graph', 'space': 1, 'grid': False},
-        {'title':'Функция распределения линии (MTF)', 'data': {'x': {'label': 'Пространственная частота (циклы/пиксель)', 'region': freq}, 'y':{'label': 'MTF', 'region': mtf}}, 'cmap': None, 'type':'graph', 'space': 2, 'grid': True},
+        {'title':'Функция передачи модуляции (MTF)', 'data': {'x': {'label': 'Пространственная частота (циклы/пиксель)', 'region': freq}, 'y':{'label': 'MTF', 'region': mtf}}, 'cmap': None, 'type':'graph', 'space': 2, 'grid': True},
+        {'title':'Качественная оценка', 'data': talmud, 'cmap': None, 'type':'text'}
     ]

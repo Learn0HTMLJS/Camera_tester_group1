@@ -12,7 +12,6 @@ from moire.moire import detect_moire_pattern
 from noise.noise import evaluate_noise
 from rolling_shutter.rolling_shutter import detect_rolling_shutter_pattern
 from sharpness.sharpness import calculate_mtf
-from color.color_checker import analyze_color_checker
 
 # Загрузка изображения
 Tk().withdraw()
@@ -46,7 +45,7 @@ img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 """
 views = [
     {'title': 'Оригинальное изображение', 'object': {'data': img_rgb, 'cmap': 'gray'}, 'type': 'plot'},
-    #{'title': 'Резкость', 'object': lambda: calculate_mtf(sharpness_file_path), 'type': 'multiplot'},
+    {'title': 'Резкость', 'object': lambda: calculate_mtf(sharpness_file_path), 'type': 'multiplot'},
     {'title': 'Эффект "Муар"', 'object': lambda: detect_moire_pattern(file_path), 'type': 'multiplot'},
     {'title': 'Временной параллакс', 'object': lambda: detect_rolling_shutter_pattern(file_path), 'type': 'plot'},
     {'title': 'Блики', 'object': lambda: detect_glare_with_otsu(file_path), 'type': 'multiplot'},
