@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
+from skimage import io, color
 from skimage.color import deltaE_ciede2000, rgb2lab
 import matplotlib.pyplot as plt
-
+from collections import defaultdict
 # Эталонные значения ColorChecker Classic (sRGB значения)
 # Патчи: Темные, светлые, основные цвета, пастельные и т. д.
 reference_colors = {
@@ -32,21 +33,38 @@ reference_colors = {
     "Black": (52, 52, 52),
 }
 
-def extract_color_patches(image, rows=4, cols=6, patch_size=100):
-    """Вырезает цветовые патчи с фотографии ColorChecker."""
-    patches = []
-    h, w = image.shape[:2]
-    cell_h, cell_w = h // rows, w // cols
+def detect_colorchecker(image):
+    # Загрузка изображения
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
-    for i in range(rows):
-        for j in range(cols):
-            y1, y2 = i * cell_h, (i + 1) * cell_h
-            x1, x2 = j * cell_w, (j + 1) * cell_w
-            patch = image[y1:y2, x1:x2]
-            avg_color = np.mean(patch, axis=(0, 1)).astype(int)
-            patches.append(avg_color)
+    # Конвертация в LAB (лучше для анализа цветов)
+    image_lab = color.rgb2lab(image_rgb)
     
-    return patches
+    # Количество цветов в ColorChecker Classic (24)
+    num_colors = 24
+    
+    # Кластеризация K-means для выделения основных цветов
+    pixels = image_lab.reshape(-1, 3).astype(np.float32)
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+    _, labels, centers = cv2.kmeans(
+        pixels, num_colors, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS
+    )
+    
+    # Конвертация центров кластеров обратно в RGB
+    centers_lab = centers.reshape(-1, 1, 3).astype(np.float32)
+    centers_rgb = color.lab2rgb(centers_lab) * 255
+    centers_rgb = centers_rgb.reshape(-1, 3).astype(np.uint8)
+    
+    # Группировка похожих цветов (если нужно)
+    color_dict = defaultdict(list)
+    for color_rgb in centers_rgb:
+        key = tuple(color_rgb)
+        color_dict[key].append(key)
+    
+    # Вывод уникальных цветов
+    unique_colors = np.array(list(color_dict.keys()))
+      
+    return unique_colors
 
 def calculate_deltaE(reference_rgb, measured_rgb):
     """Вычисляет Delta E между эталонным и измеренным цветом."""
@@ -61,7 +79,7 @@ def analyze_color_checker(image_path):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # OpenCV читает в BGR
     
     # Извлекаем цвета с таблицы
-    measured_colors = extract_color_patches(image)
+    measured_colors = detect_colorchecker(image)
     
     # Сравниваем с эталоном
     delta_errors = []
@@ -69,9 +87,7 @@ def analyze_color_checker(image_path):
         delta_e = calculate_deltaE(ref_rgb, measured_rgb)
         delta_errors.append(delta_e)
         print(f"{name:15} | Эталон: {ref_rgb} | Камера: {measured_rgb} | ΔE: {delta_e:.2f}")
-    
-    # Визуализация
-    plt.figure(figsize=(12, 6))
+
     plt.bar(range(len(delta_errors)), delta_errors)
     plt.axhline(y=2, color='r', linestyle='--', label="ΔE < 2 (Хорошо)")
     plt.axhline(y=5, color='orange', linestyle='--', label="ΔE < 5 (Приемлемо)")
@@ -81,5 +97,18 @@ def analyze_color_checker(image_path):
     plt.legend()
     plt.show()
 
+    # Результат
+    return [
+        {
+            'title' : 'Ошибки цветопередачи (Delta E 2000)', 
+            'data' : [range(len(delta_errors)), delta_errors],
+            #'axhline' : {{'y':2}, {'color':'r'}, {'linestyle':'--'}, {"label":"ΔE < 2 (Хорошо)"}},
+            #'axhline' : {{'y':5}, {'color':'orange'}, {'linestyle':'--'}, {"label":"ΔE < 5 (Приемлемо)"}},
+            'xlabel' : 'Патч ColorChecker',
+            'ylabel' : 'Delta E (CIEDE2000)'
+        }
+    ]
+    #plt.figure(figsize=(12, 6))
+
 # Пример использования
-analyze_color_checker("/home/chyn9/Политех/2 семестр/Техническое зрение/Camera_tester_group1/resources/img/color/fake-сolor-сhecker.webp")
+#analyze_color_checker("/home/chyn9/Политех/2 семестр/Техническое зрение/Camera_tester_group1/resources/img/color/fake-сolor-сhecker.webp")
